@@ -20,7 +20,7 @@ import adminRouter from "./routes/adminRouter";
 import orderRouter from "./routes/orderRouter";
 
 import { polarWebhookHandler } from "./webhooks/polar";
-import { sentryClerkUserMiddleware } from "./middleware/sentryClerkUser";
+// import { sentryClerkUserMiddleware } from "./middleware/sentryClerkUser";
 
 const env = getEnv();
 const app = express();
@@ -38,7 +38,7 @@ app.post("/webhooks/polar", rawJson, (req, res) => {
 app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
-app.use(sentryClerkUserMiddleware);
+// app.use(sentryClerkUserMiddleware);
 
 app.get("/health", (_req, res) => {
   res.json({ ok: true });
