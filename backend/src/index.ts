@@ -20,12 +20,13 @@ import chekoutRouter from "./routes/checkoutRouter";
 // import orderRouter from "./routes/orderRouter";
 
 import { polarWebhookHandler } from "./webhooks/polar";
-// import { sentryClerkUserMiddleware } from "./middleware/sentryClerkUser";
+import { sentryClerkUserMiddleware } from "./middleware/sentryClerkUser";
 
 const env = getEnv();
 const app = express();
 
 const rawJson = express.raw({ type: "application/json", limit: "1mb" });
+
 
 // it's important that you don't parse the webhook event data, it should be in the raw format
 app.post("/webhooks/clerk", rawJson, (req, res) => {
@@ -38,7 +39,7 @@ app.post("/webhooks/polar", rawJson, (req, res) => {
 app.use(express.json());
 app.use(cors());
 app.use(clerkMiddleware());
-// app.use(sentryClerkUserMiddleware);
+app.use(sentryClerkUserMiddleware);
 
 app.get("/health", (_req, res) => {
   res.json({ ok: true });
