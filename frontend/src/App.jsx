@@ -5,7 +5,7 @@ import { Routes, Route, Navigate } from "react-router";
 import HomePage from "./pages/HomePage";
 import CartPage from "./pages/CartPage";
 import OrdersPage from "./pages/OrdersPage";
-// import CheckoutReturnPage from "./pages/CheckoutReturnPage";
+import CheckoutReturnPage from "./pages/CheckoutReturnPage";
 // import ProductDetailPage from "./pages/ProductDetailPage";
 // import { SentryDemoPage } from "./pages/SentryDemoPage";
 // import OrderDetailPage from "./pages/OrderDetailPage";
@@ -29,7 +29,7 @@ function App() {
           path="/orders"
           element={isSignedIn ? <OrdersPage /> : <Navigate to={"/"} replace />}
         />
-        {/* <Route path="/checkout/return" element={<CheckoutReturnPage />} /> */}
+        <Route path="/checkout/return" element={<CheckoutReturnPage />} />
 
         {/* <Route path="/demo-sentry" element={<SentryDemoPage />} />
 
