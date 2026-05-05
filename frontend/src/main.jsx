@@ -2,8 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+
 import * as Sentry from "@sentry/react";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { ClerkProvider } from "@clerk/react";
 import { BrowserRouter } from "react-router";
 import { SentryErrorFallback } from "./components/SentryErrorFallback.jsx";
@@ -24,11 +27,11 @@ Sentry.init({
   environment: import.meta.env.MODE,
   sendDefaultPii: true,
   integrations: [
-    new Sentry.BrowserTracing(),
+    Sentry.browserTracingIntegration(),
     Sentry.replayIntegration({
       maskAllText: false,
-      blockAllMedia: false,
       maskAllInputs: false,
+      blockAllMedia: false,
     }),
   ],
   tracesSampleRate: 1.0,
@@ -41,10 +44,10 @@ Sentry.init({
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ClerkProvider>
-      <SentryUserSync/>
+      <SentryUserSync />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-          <Sentry.ErrorBoundary fallback={<SentryErrorFallback/>}>
+          <Sentry.ErrorBoundary fallback={<SentryErrorFallback />}>
             <App />
           </Sentry.ErrorBoundary>
         </BrowserRouter>
@@ -52,3 +55,4 @@ createRoot(document.getElementById("root")).render(
     </ClerkProvider>
   </StrictMode>,
 );
+
